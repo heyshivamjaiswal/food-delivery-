@@ -1,15 +1,14 @@
-import { useContext, useState } from "react"
+import { useState } from "react"
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../utils/useOnlineStaus";
-import UserContext from "../utils/UserContext";
 import { useSelector } from "react-redux";
 import type { RootState } from "../utils/appStore";
+
 
 export function Header(){
     const[btnNameReact , setBtnNameReact] = useState("Login");
 
-    // const {loggedInUser} = useContext(UserContext)
-    // console.log(loggedInUser);
+
  
     //subscring to the store using a selector 
   const items = useSelector((state: RootState) => state.cart.items);
@@ -48,7 +47,7 @@ export function Header(){
 
          <li className="hover:text-red-500 transition">
          <Link to="/cart">
-          Cart- ({items.length}items)
+          Cart- ({items.length} items)
           </Link> 
           </li>
 
