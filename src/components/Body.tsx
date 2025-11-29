@@ -55,7 +55,7 @@ export function Body() {
       <div className="flex flex-wrap items-center gap-3 mb-6 justify-center">
         <input
           type="text"
-          placeholder="Search restaurants..."
+          placeholder="Search cuisines..."
           className=" w-60 px-4 py-2 rounded-xl bg-white/80 backdrop-blur-sm border border-gray-300 shadow-md transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-blue-300 focus:border-transparent hover:-translate-y-0.5 hover:shadow-xl"
           value={searchText}
           onChange={(e) => setSearchText(e.target.value)}
