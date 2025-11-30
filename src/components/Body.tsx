@@ -50,13 +50,12 @@ export function Body() {
     setFilteredRestaurants(topRated);
   }
 
-  // ✅ Show Shimmar loader if restaurants not loaded
 if (allRestaurants.length === 0) return <Shimmar type="restaurant" />;
 
 
   return (
     <div className="bg-gray-100 container mx-auto p-5">
-      {/* Search & Filter */}
+  
       <div className="flex flex-col sm:flex-row items-center gap-3 mb-6 justify-center z-10 relative">
         <input
           type="text"
@@ -78,8 +77,6 @@ if (allRestaurants.length === 0) return <Shimmar type="restaurant" />;
           Top Rated
         </button>
       </div>
-
-      {/* Restaurant Cards */}
       <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {filteredRestaurants.map((restaurant) => (
           <Link
