@@ -13,12 +13,11 @@ function Cart() {
 
   return (
     <div className="max-w-5xl mx-auto p-6">
-      {/* Title */}
+
       <h1 className="text-3xl font-bold text-gray-800 mb-6 text-center">
         Your Cart
       </h1>
 
-      {/* Clear Button & Empty Message */}
       <div className="flex flex-col sm:flex-row justify-between items-center mb-6 gap-4">
         <button
           className="bg-red-500 text-white px-5 py-2 rounded-xl shadow hover:bg-red-700 transition-all duration-300"
@@ -34,8 +33,6 @@ function Cart() {
           </span>
         )}
       </div>
-
-      {/* Cart Items */}
       {cartItem.length > 0 && (
         <div className="grid gap-4">
           <ItemList item={cartItem} />
