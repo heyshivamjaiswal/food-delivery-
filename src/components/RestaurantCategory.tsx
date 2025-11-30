@@ -20,7 +20,6 @@ function RestaurantCategory({ cat }: Props) {
           key={c.title}
           className="w-3/5 mx-auto bg-gray-50 shadow-md rounded-xl"
         >
-          {/* Header */}
           <div
             className="flex justify-between items-center p-4 cursor-pointer"
             onClick={() => handleToggle(c.title)}
@@ -33,8 +32,6 @@ function RestaurantCategory({ cat }: Props) {
               {openCategory === c.title ? "▲" : "▼"}
             </span>
           </div>
-
-          {/* Body */}
           {openCategory === c.title && (
             <div className="px-4 pb-4">
               <ItemList item={c.itemCards} />

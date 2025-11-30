@@ -6,7 +6,7 @@ class User extends React.Component{
      render(){
         return(
         <About
-        name="Shivam Jaiswal"
+        name="x"
         location= "Delhi"
         twitter= "twitter"
         />

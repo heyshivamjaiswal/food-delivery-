@@ -18,17 +18,20 @@ function RestaurantMenu(){
     data.cards.find((c) => c.groupedCard)?.groupedCard?.cardGroupMap.REGULAR
       .cards ?? [];
 
-  const categories: Category[] = menuInfo
-    .flatMap((c) => c.card?.card?.categories??[])
-    .filter((cat): cat is Category => !!cat);
+const categories: Category[] = menuInfo
+  .flatMap((c) => c.card?.card?.categories ?? [])
+  // Remove duplicate categories by title
+  .filter((cat, idx, arr) => arr.findIndex(x => x.title === cat.title) === idx);
 
     const regularCards =
     data?.cards
     ?.find((c) => c.groupedCard)
     ?.groupedCard?.cardGroupMap?.REGULAR?.cards || [];
 
-   const fallbackItems = regularCards
-  .flatMap((c) => c .card?.card?.itemCards || []);
+  const fallbackItems = regularCards
+  .flatMap((c) => c.card?.card?.itemCards ?? [])
+  // Remove duplicate items by id
+  .filter((item, idx, arr) => arr.findIndex(x => x.card.info.id === item.card.info.id) === idx);
 
   return (
   <div className="menu container mx-auto px-4 py-6">

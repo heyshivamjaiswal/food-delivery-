@@ -7,12 +7,21 @@ export type resCarcInfo = {
 };
 
 export function ResCard({ resData }: resCarcInfo) {
-  const { name, cloudinaryImageId, cuisines, avgRating } = resData;
+  const { name, cloudinaryImageId, cuisines, avgRating , badges , badgesV2 } = resData;
+
+  const isPromoted = 
+  badgesV2?.entityBadges.imageBased.badgeObject.some(
+    (b)=>b.attributes.description == "Promoted")|| badges?.imageBadges.some((b)=>b.description == "Promoted");
+  
+  
 
   return (
     <div className="bg-white rounded-2xl shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col h-full p-4">
       
-      {/* Image fixed size */}
+      {isPromoted &&(
+        <span className="absolute top-0 left-0 bg-yellow-400 text-black text-xs font-bold px-2 py-1 rounded-br -scale-z-105"></span>
+      )}
+     
       <img
      src={
     cloudinaryImageId
@@ -23,7 +32,6 @@ export function ResCard({ resData }: resCarcInfo) {
         className="w-full h-40 object-cover rounded-xl mb-3"
       />
 
-      {/* Content */}
       <h3 className="font-semibold text-lg mb-1 line-clamp-1">{name}</h3>
       <p className="text-gray-600 text-sm line-clamp-2 mb-2">
         {cuisines?.join(", ")}

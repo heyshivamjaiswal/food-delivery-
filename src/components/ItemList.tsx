@@ -1,6 +1,7 @@
 import { useDispatch } from "react-redux";
 import type { ItemCard } from "../utils/type";
 import { adddItem } from "../utils/cartSlice";
+import { useState } from "react";
 
 type itemProp = {
   item?: ItemCard[];
@@ -9,12 +10,17 @@ type itemProp = {
 export const ItemList = ({ item }: itemProp) => {
   if (!item || item.length === 0) return null;
 
+const [addedItems, setAddedItems] = useState<Set<string>>(new Set());
+
    
   const dispatch = useDispatch();
  
   const handleAddItem = (item:ItemCard)=>{
     //dispatch an action 
     dispatch(adddItem(item))
+
+    setAddedItems((prev) => new Set(prev).add(item.card.info.id));
+
   }
 
   return (
@@ -49,18 +55,18 @@ export const ItemList = ({ item }: itemProp) => {
               className="w-32 h-32 object-cover rounded-xl shadow-md"
             />
               <div></div>
-            <button
-              className="
-                absolute bottom-2 left-1/2 -translate-x-1/2
-                bg-white text-green-600 font-semibold 
-                border border-gray-300 px-4 py-1 rounded-lg 
-                shadow-sm text-sm
-                hover:bg-gray-100
-              "
-              onClick={()=>handleAddItem(t)}
-            >
-              ADD+
-            </button>
+           <button
+            className={`
+              absolute bottom-2 left-1/2 -translate-x-1/2
+              font-semibold border px-4 py-1 rounded-lg shadow-sm text-sm cursor-pointer
+              ${addedItems.has(t.card.info.id)
+                ? "bg-green-600 text-white border-green-600"
+                : "bg-white text-green-600 border-gray-300 hover:bg-gray-100"}
+            `}
+            onClick={() => handleAddItem(t)}
+          >
+            {addedItems.has(t.card.info.id) ? "ADDED" : "ADD+"}
+          </button>
           </div>
         </li>
       ))}

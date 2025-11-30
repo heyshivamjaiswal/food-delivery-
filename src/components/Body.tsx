@@ -3,6 +3,7 @@ import { ResCard } from "./ResCard";
 import Shimmar from "./Shimmar";
 import { Link } from "react-router-dom";
 import type { Restaurant, Root } from "../utils/constants";
+const RESTAURANT_API = import.meta.env.VITE_RESTAURANT_API;
 
 export function Body() {
   const [allRestaurants, setAllRestaurants] = useState<Restaurant[]>([]);
@@ -13,15 +14,16 @@ export function Body() {
     async function fetchData() {
       try {
         const data = await fetch(
-          "https://foodfire.onrender.com/api/restaurants?lat=21.1702401&lng=72.83106070000001&page_type=DESKTOP_WEB_LISTING"
+          RESTAURANT_API
         );
         const json: Root = await data.json();
 
         const restaurants =
-          json?.data?.cards
-            ?.map((c) => c.card?.card?.gridElements?.infoWithStyle?.restaurants)
-            ?.flat()
-            ?.filter((r): r is Restaurant => Boolean(r)) ?? [];
+        json?.data?.cards
+         ?.flatMap((c) =>
+         c.card?.card?.gridElements?.infoWithStyle?.restaurants??[] )
+       .filter((r,i , arr)=>arr.findIndex((x)=>x.info.id === r.info.id) === i)
+
 
         setAllRestaurants(restaurants);
         setFilteredRestaurants(restaurants);
@@ -33,44 +35,47 @@ export function Body() {
     fetchData();
   }, []);
 
+ function handleSearch(){
+  const filtered = allRestaurants.filter((res)=>
+  res.info.cuisines?.some(cusine=>
+    cusine.toLocaleLowerCase().includes(searchText.toLocaleLowerCase())
+  )
+  );
+  setFilteredRestaurants(filtered)
+ }
 
-  function handleSearch() {
-    const filtered = allRestaurants.filter((res) =>
-      res.info.name.toLowerCase().includes(searchText.toLowerCase())
-    );
-    setFilteredRestaurants(filtered);
-  }
 
-  function filterTopRated() {
-    const topRated = allRestaurants.filter(
-      (res) => Number(res.info.avgRating) > 4
-    );
-    setFilteredRestaurants(topRated);
-  }
+ function filterTopRated() {
+  const topRated = allRestaurants.filter((res) => {
+    const rating = Number(res.info.avgRating);
+    return !isNaN(rating) && rating >= 4.5;
+  });
+  setFilteredRestaurants(topRated);
+}
 
   if (allRestaurants.length === 0) return <Shimmar />;
 
   return (
     <div className="bg-gray-100 container mx-auto p-5">
-      <div className="flex flex-wrap items-center gap-3 mb-6 justify-center">
+      <div className="flex flex-col sm:flex-row items-center gap-3 mb-6 justify-center z-10 relative">
         <input
           type="text"
           placeholder="Search cuisines..."
-          className=" w-60 px-4 py-2 rounded-xl bg-white/80 backdrop-blur-sm border border-gray-300 shadow-md transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-blue-300 focus:border-transparent hover:-translate-y-0.5 hover:shadow-xl"
+          className=" w-full sm:w-60 px-4 py-2 rounded-xl bg-white/80 backdrop-blur-sm border border-gray-300 shadow-md transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-blue-300 focus:border-transparent hover:-translate-y-0.5 hover:shadow-xl"
           value={searchText}
           onChange={(e) => setSearchText(e.target.value)}
         />
 
         <button
           onClick={handleSearch}
-          className="bg-red-500 text-white font-normal px-4 py-2 rounded-lg hover:bg-red-700 shadow-sm hover:shadow-lg transition-all duration-300 focus:border-transparent hover:-translate-y-0.5"
+          className="w-full sm:w-auto bg-red-500 text-white font-normal px-4 py-2 rounded-lg hover:bg-red-700 shadow-sm hover:shadow-lg transition-all duration-300 focus:border-transparent hover:-translate-y-0.5"
         >
           Search
         </button>
 
         <button
           onClick={filterTopRated}
-          className="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition"
+          className="w-full sm:w-auto bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition"
         >
           Top Rated
         </button>

@@ -15,7 +15,6 @@ export default function MenuCard({ restaurantInfo }: MenuCardProps) {
 
   return (
     <div className="menu-card flex gap-4 items-start bg-white border rounded-lg p-4">
-      {/* Image */}
       {imageId ? (
         <img
           src={`${CDN_SMALL}/${imageId}`}
@@ -25,8 +24,6 @@ export default function MenuCard({ restaurantInfo }: MenuCardProps) {
       ) : (
         <div className="w-20 h-20 bg-gray-200 rounded" />
       )}
-
-      {/* Info */}
       <div className="menu-card-text flex-1">
         <h2 className="font-medium text-lg">{name}</h2>
 

@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import type { Data, Root } from "./type";
 
+const MENU_API = import.meta.env.VITE_MENU_API;
+
 function useRestaurantMenu(resId:string){
     //fetching the data
     const [data, setData] = useState<Data | null>(null);
@@ -10,7 +12,7 @@ function useRestaurantMenu(resId:string){
     },[]);
 
     const fetchData = async()=>{
-        const res = await fetch("https://foodfire.onrender.com/api/menu?page-type=REGULAR_MENU&complete-menu=true&lat=21.1702401&lng=72.83106070000001&submitAction=ENTER&restaurantId="+resId)
+        const res = await fetch(MENU_API+resId)
         const json  = await res.json() as Root
         setData(json.data);
     }
