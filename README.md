@@ -1,73 +1,159 @@
-# React + TypeScript + Vite
+# 🍽️ Food Delivery App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern and visually appealing **React-based Food Delivery Web App** with restaurant listings, menus, cart system, online status detection, context API, Redux Toolkit, and smooth UI powered by Tailwind CSS.
 
-Currently, two official plugins are available:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## React Compiler
+## ⭐ Project Highlights
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+---
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## ⭐ Project Highlights
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+### 🏠 **Home Page**
+
+* Beautiful grid layout showcasing restaurants.
+* Search bar with hover animations.
+* "Top Rated" filter.
+* Smooth card lift effects.
+
+### 📋 **Restaurant Menu Page**
+
+* Dynamic menu based on restaurant ID.
+* Accordion-style categories.
+* Add items directly to cart.
+
+### 🛒 **Cart Page**
+
+* View added items.
+* Clear cart option.
+* Global state handled with Redux Toolkit.
+
+### 🌐 **Online Status**
+
+* Detects real-time internet connection.
+* Shows green/red indicator in header.
+
+### 👤 **User Context**
+
+* Logged-in username displayed everywhere using Context API.
+
+### 📦 **Tech Used**
+
+* **React 18**
+* **React Router DOM**
+* **Redux Toolkit**
+* **Tailwind CSS**
+* **Context API**
+* **Custom Hooks**
+* **Vercel Deployment**
+
+---
+
+## 🖼️ Screenshots
+
+### 🏠 Home Page
+
+![Home Page](./screenshot/HomePage.png)
+
+### 📋 Menu Page
+
+![Menu Page](./screenshot/MenuPage.png)
+
+### 🛒 Cart Page
+
+![Cart Page](./screenshot/CartPage.png)
+
+> All images are stored in the `screenshot/` folder.
+
+---
+
+## 📂 Folder Structure
+
+```
+project/
+ ├── src/
+ │    ├── components/
+ │    │     ├── Header.jsx
+ │    │     ├── Body.jsx
+ │    │     ├── Cart.jsx
+ │    │     ├── RestaurantMenu.jsx
+ │    │     ├── ResCard.jsx
+ │    │     └── Shimmer.jsx
+ │    │
+ │    ├── utils/
+ │    │     ├── UserContext.js
+ │    │     ├── appStore.js
+ │    │     ├── cartSlice.js
+ │    │     └── useOnlineStatus.js
+ │    │
+ │    ├── App.jsx
+ │    └── main.jsx
+ │
+ ├── screenshot/
+ │     ├── HomePage.png
+ │     ├── MenuPage.png
+ │     └── CartPage.png
+ │
+ └── README.md
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+---
+
+## 🧠 Key Concepts Used
+
+### 🔹 **Context API (UserContext)**
+
+```jsx
+<UserContext.Provider value={{ loggedInUser: "Shivam" }}>
+   <App />
+</UserContext.Provider>
+```
+
+### 🔹 **Redux Toolkit (Cart State)**
 
 ```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+dispatch(addItem(item));
 ```
+
+### 🔹 **Custom Hook Example**
+
+```js
+const onlineStatus = useOnlineStatus();
+```
+
+---
+
+## 🛠️ Installation
+
+```bash
+git clone https://github.com/heyshivamjaiswal/food-delivery-.git
+cd food-delivery-
+npm install
+npm run dev
+```
+
+---
+
+## 🌍 Live Demo
+
+**Vercel Deployment:**
+👉 [https://food-delivery-sigma-blond.vercel.app/](https://food-delivery-sigma-blond.vercel.app/)
+
+---
+
+## ❤️ Author
+
+Made with passion by **Shivam (Stari)**.
+
+---
+
+## 📜 License
+
+This project is open-source under the **MIT License**.
+
